@@ -1,0 +1,94 @@
+.top-container {
+  grid-area: header;
+  display: grid;
+  grid-template-columns: 80px 1fr 80px;
+  grid-template-rows: auto;
+  grid-template-areas:
+    "nav nav nav";
+}
+
+#pub-title-nav {
+  display: block;
+  position: absolute;
+  float: left;
+}
+
+#loginForm {
+  width: 92%;
+  min-width: 350px;
+  max-width: 950px;
+  margin: 6% auto;
+  padding: 2%;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 4px rgba(0, 0, 0, 0.15), 0 8px 16px 8px rgba(0, 0, 0, 0.2);
+}
+
+form h1 {
+  width: 40%;
+  font-size: 32px;
+  text-align: center;
+  margin: 2% auto 6% auto;
+  padding-bottom: 10px;
+  border-bottom: 1px black solid;
+}
+
+.input-button {
+  border: 1px black solid;
+  width: 60%;
+  max-width: 600px;
+  min-width: 320px;
+  display: block;
+  text-align: center;
+  margin: 1% auto;
+  font-size: 20px;
+  border-radius: 15px;
+  padding: 10px 15px;
+  outline: none;
+}
+
+.input-button:hover, .input-button:active {
+  border: 1px #666 solid;
+}
+
+::-webkit-inner-spin-button {
+  display: none;
+}
+
+#submit-button {
+  background: linear-gradient(rgba(51, 133, 255, 0.7), rgba(51, 133, 255, 0.9));
+  color: white;
+  border: none;
+  margin-top: 2%;
+}
+
+#submit-button:hover {
+  background: linear-gradient(rgba(51, 133, 255, 0.65), rgba(51, 133, 255, 0.85));
+}
+
+form p {
+  display: block;
+  margin: 2% auto;
+  text-align: center;
+  font-size: 14px;
+}
+
+form p a {
+  text-decoration: none;
+  color: rgb(51, 133, 255);
+}
+
+form p a:hover {
+  text-decoration: underline;
+}
+
+@media only screen and (max-width: 850px) {
+  #pub-title-nav {
+    position: relative;
+  }
+
+  .input-button {
+    width: 96%;
+    margin: 2% auto;
+    max-width: none;
+  }
+}

@@ -1,0 +1,312 @@
+body {
+  margin: 0;
+  background-color: white;
+  font-family: sans-serif;
+  font-weight: 100;
+}
+
+h1 {
+  font-weight: 200;
+}
+
+.top-container {
+  grid-area: header;
+  display: grid;
+  grid-template-columns: 80px 1fr 80px;
+  grid-template-rows: auto 600px;
+  grid-template-areas:
+    "nav nav nav";
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 80px 1fr 1fr 1fr 1fr 80px;
+  grid-template-rows: auto;
+  grid-template-areas:
+    "header header header header header header"
+    ". content content content content ."
+    "footer footer footer footer footer footer";
+}
+
+.nav-bar {
+  grid-area: nav;
+  background-color: white;
+  justify-self: end;
+  width: 100%;
+  top: 0;
+  position: fixed;
+  transition: ease-in-out, 0.5s;
+}
+
+#nav-button, #nav-menu {
+  list-style-type: none;
+  padding: 0;
+  width: 100%;
+  overflow: hidden;
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+#nav-menu {
+  box-shadow: 0 8px 6px -6px rgba(0, 0, 0, 0.25)
+}
+
+#nav-button li {
+  float: right;
+  width: 120px;
+  border: none;
+}
+
+#nav-button li a {
+  border-bottom: 2px white solid;
+}
+
+#nav-menu li {
+  background-color: white;
+}
+
+#nav-button li a, #nav-menu li a {
+  display: block;
+  color: #413c3c;
+  padding: 14px 0px;
+  text-decoration: none;
+  font-family: Arial;
+  text-align: center;
+  vertical-align: middle;
+}
+
+#nav-button li:first-child a {
+  border-left: 1px #1a1a1a solid;
+  color: #413c3c;
+}
+
+#nav-button li a:hover, #nav-menu li a:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+  border-bottom: 2px green solid;
+  transition: ease-in-out, 0.5s;
+}
+
+#nav-menu li a:hover {
+  border: none;
+}
+
+.menu-icon {
+  background: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 3px 15px 0 15px;
+  color: black;
+  border: 0;
+  font-weight: bold;
+  cursor: pointer;
+  outline: none;
+  z-index: 2;
+  float: right;
+  display: none;
+}
+
+#hamburger {
+  line-height: 45px;
+  font-size: 1.4em;
+}
+
+#cross {
+  line-height: 60px;
+  font-size: 3em;
+  display: none;
+}
+
+#pub-title-nav {
+  grid-area: nav;
+  place-self: stretch stretch;
+  margin: 6px;
+  padding: 0;
+  font-size: 30px;
+  color: black;
+  background: none;
+  position: relative;
+  display: none;
+}
+
+#pub-title-header {
+  display: block;
+  grid-area: header-content;
+  font-size: 48px;
+  place-self: end center;
+  margin-bottom: 8%;
+  padding: 10px 20px;
+  border-radius: 5px;
+  color: white;
+}
+
+.content {
+  grid-area: content;
+  background-color: white;
+  padding: 30px;
+  margin: 60px 0 60px 0;
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto;
+}
+
+.page-footer {
+  grid-area: footer;
+  background: rgb(41, 44, 47);
+  color: white;
+  bottom: 0;
+  width: 96%;
+  height: auto;
+  padding: 2%;
+  display: grid;
+  grid-template-columns: 25% 35% 35%;
+  grid-template-rows: auto;
+  grid-template-areas:
+    "footer-left footer-center footer-right";
+}
+
+#footer-company-details, #footer-contact-details, #footer-company-about {
+  align-self: stretch;
+  justify-self: stretch;
+  text-align: left;
+  margin: 0;
+}
+
+#footer-company-details {
+  grid-area: footer-left;
+}
+
+#footer-contact-details {
+  grid-area: footer-center;
+}
+
+#footer-company-about {
+  grid-area: footer-right;
+}
+
+#footer-company-details h1, #footer-company-about h1 {
+  margin: 10px 0 0 0;
+}
+
+#footer-company-details h1, .footer-icon-text, #footer-company-about h1 {
+  font-size: 16px;
+}
+
+#footer-company-details p, #footer-company-about p, #footer-company-location span {
+  font-size: 14px;
+  font-style: italic;
+}
+
+.footer-contact-icon, .footer-media-icon {
+  float: left;
+  background-color: #32373c;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  margin: 10px 15px;
+  vertical-align: middle;
+}
+
+.footer-contact-icon {
+  border-radius: 50%;
+}
+
+.footer-media-icon {
+  border-radius: 2px;
+  margin: 10px 5px;
+}
+
+#footer-company-location, #footer-company-phone, #footer-company-email {
+  margin-bottom: 10px;
+}
+
+#footer-company-location span, #footer-company-phone span, #footer-company-email span {
+  display: block;
+  line-height: 2;
+  font-size: 16px;
+  margin: 0;
+}
+
+#footer-company-phone .footer-icon-text p {
+  display: inline-block;
+  line-height: 1.75;
+}
+
+@media only screen and (max-width: 850px) {
+  .container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto auto;
+    grid-template-areas:
+      "header header header header"
+      "content content content content"
+      "footer footer footer footer";
+  }
+
+  #nav-button {
+    display: none;
+  }
+
+  #nav-menu {
+    display: none;
+    background-color: #1a1a1a;
+  }
+
+  .menu-icon {
+    display: block;
+  }
+
+  #pub-title-nav {
+    display: block;
+  }
+
+  #pub-title-header {
+    display: none;
+  }
+
+  .page-footer {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+    grid-template-areas:
+      "footer-left footer-right"
+      "footer-bottom footer-bottom";
+  }
+
+  #footer-company-details, #footer-contact-details, #footer-company-about {
+    text-align: left;
+    margin: 10px 2%;
+    width: 96%;
+  }
+
+  #footer-company-details {
+    align-self: stretch;
+    justify-self: stretch;
+    grid-area: footer-left;
+  }
+
+  #footer-contact-details {
+    align-self: stretch;
+    justify-self: stretchr;
+    grid-area: footer-right;
+  }
+
+  #footer-company-about {
+    align-self: stretch;
+    justify-self: center;
+    grid-area: footer-bottom;
+    text-align: center;
+  }
+}
+
+@media only screen and (min-width: 851px) {
+  #nav-button {
+    display: block;
+  }
+
+  #nav-menu, #hamburger, #cross {
+    display: none;
+    visibility: hidden;
+  }
+}
