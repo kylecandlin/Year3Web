@@ -4,8 +4,8 @@
   require 'Includes/Classes.php';
 
   if(isset($_POST['submitButton'])){
-    $User = new User($pdo);
-    $User->CreateUser($_POST['username'], $_POST['password']);
+    $newUser = new User($pdo);
+    $newUser->CreateUser($_POST['username'], $_POST['password']);
   }
 ?>
 <html lang="en">
@@ -18,7 +18,7 @@
   src="https://code.jquery.com/jquery-3.4.1.js"
   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
   crossorigin="anonymous"></script>
-  <script src="JavaScript/index.js"></script>
+  <script src="Includes/index.js"></script>
 </head>
 <body>
   <section class="container">

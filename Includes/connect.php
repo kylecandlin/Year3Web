@@ -11,10 +11,9 @@
 
     //Set error mode to exceptional
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo "Connection successful";
   }
 
   catch(PDOException $e){
-    echo "Connection error: " . $e->getMessage();
+
   }
 ?>

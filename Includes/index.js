@@ -37,7 +37,7 @@ $(document).ready(function(){
     var username = $(this).val();
     $.ajax({
       type:"POST",
-      url:"checkValues.php",
+      url:"Includes/checkValues.php",
       data:({
         username: username
       }),
@@ -46,7 +46,7 @@ $(document).ready(function(){
         if(msg == 1) {
           console.log("exists");
         }
-        else {
+        else if (msg == 0){
           console.log("not exists");
         }
       }

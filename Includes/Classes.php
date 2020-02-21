@@ -13,7 +13,7 @@ class User {
     ];
     $passwordHash = password_hash($password.$this->salt, PASSWORD_BCRYPT, $options);
 
-    $sql = "SELECT PersonID, Username, Password FROM Person WHERE Username = :username";
+    $sql = "SELECT * FROM Person WHERE Username = :username";
     $stmt = $this->pdo->prepare($sql);
 
     $stmt->bindValue(':username', $username);
