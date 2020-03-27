@@ -81,6 +81,10 @@ form p a:hover {
   text-decoration: underline;
 }
 
+.validError {
+  color: red;
+}
+
 @media only screen and (max-width: 850px) {
   #pub-title-nav {
     position: relative;

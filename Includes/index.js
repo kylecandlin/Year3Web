@@ -24,7 +24,6 @@ $(document).ready(function(){
     closeNav();
   });
 
-
   $("#hamburger").click(function(){
     openNav();
   });

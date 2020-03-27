@@ -19,6 +19,7 @@
   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
   crossorigin="anonymous"></script>
   <script src="Includes/index.js"></script>
+  <script src="validation.js"></script>
 </head>
 <body>
   <section class="container">
@@ -26,7 +27,9 @@
       <form action="" method="post" id="loginForm">
         <h1> Login </h1>
         <input id="username" name="username" class="input-button" type="text" placeholder="Username" />
+        <p id="usernameError" class="validError"></p>
         <input id="password" name="password" class="input-button" type="text" placeholder="Password" />
+        <p id="passwordError" class="validError"></p>
         <input id="submit-button" name="submitButton" class="input-button" type="submit" value="Log In"/>
         <p> No account? <a href="register.php"> Create one here. </a></p>
       </form>
