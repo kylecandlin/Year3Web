@@ -23,6 +23,7 @@
     </section>
     <section class="content">
       <section id="list">
+        <p id="filter-title">Order by</p>
         <select id="orderBy">
           <option selected="selected">Name</option>
           <option>Serving</option>
@@ -30,7 +31,6 @@
         </select>
       </section>
       <section id="single">
-        
       </section>
     </section>
     <section class="page-footer">
