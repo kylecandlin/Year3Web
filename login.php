@@ -1,6 +1,5 @@
 <?php
   require 'Includes/connect.php';
-  require 'Includes/navigationPanel.php';
   require 'Includes/Classes.php';
 
   if(isset($_POST['submitButton'])){
@@ -19,10 +18,14 @@
   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
   crossorigin="anonymous"></script>
   <script src="Includes/index.js"></script>
-  <script src="validation.js"></script>
 </head>
 <body>
   <section class="container">
+    <section class="top-container">
+      <?php
+        require 'Includes/navigationPanel.php';
+      ?>
+    </section>
     <section class="content">
       <form action="" method="post" id="loginForm">
         <h1> Login </h1>
@@ -35,38 +38,7 @@
       </form>
     </section>
     <section class="page-footer">
-        <section id="footer-company-details">
-          <h1> The Bridge Inn </h1>
-          <p> est 1890 </p>
-          <section id="footer-media-links">
-            <p class="footer-media-icon"> img </p>
-            <p class="footer-media-icon"> img </p>
-            <p class="footer-media-icon"> img </p>
-            <p class="footer-media-icon"> img </p>
-          </section>
-        </section>
-        <section id="footer-contact-details">
-          <section id="footer-company-location">
-            <p class="footer-contact-icon"> img </p>
-            <section class="footer-icon-text">
-              <span> 8 Bridge Street </span>
-              Stourport On Severn
-            </section>
-          </section>
-          <section id="footer-company-phone">
-            <p class="footer-contact-icon"> img </p>
-            <section class="footer-icon-text">
-              <p> 01299 123456 </p>
-            </section>
-          </section>
-        </section>
-        <section id="footer-company-about">
-          <h1> About The Pub </h1>
-          <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            Quis commodo odio aenean sed adipiscing diam donec. In cursus 0turpis
-            massa tincidunt dui ut ornare lectus. Commodo elit at imperdiet dui. </p>
-        </section>
+      <?php require 'Includes/footer.php'; ?>
     </section>
   </section>
 </body>

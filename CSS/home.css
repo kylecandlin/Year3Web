@@ -18,7 +18,7 @@
 .header-content {
   grid-column: 2;
   grid-row: 2;
-  background: url(food-index.jpeg) no-repeat center center fixed;
+  background: url(Images/food-index.jpeg) no-repeat center center fixed;
   background-size: cover;
   height: 450px;
   width: 100%;

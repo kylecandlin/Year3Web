@@ -13,10 +13,21 @@
   float: left;
 }
 
-.info-container {
-  display: block;
-  width: 92%;
+.clickable {
+  text-decoration: none;
+  color: black;
   margin: 2%;
+  display: block;
+}
+
+.clickable:hover {
+  box-shadow: 0 4px 8px 4px rgba(0, 0, 0, 0.2), 0 6px 20px 6px rgba(0, 0, 0, 0.18);
+  cursor: pointer;
+}
+
+.info-container {
+  display: inline-block;
+  width: 92%;
   padding: 2%;
   text-align: left;
 }

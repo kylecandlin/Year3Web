@@ -61,20 +61,22 @@ CREATE TABLE AccFav (
   CONSTRAINT FK_AccFavRecipe FOREIGN KEY(RecipeID) REFERENCES Recipe(RecipeID)
 );
 
-INSERT INTO Person(Username, Password) VALUES('Toby', 'Parsons');
-
 INSERT INTO Ingredient(Name) VALUES
                                   ('Onion'),
                                   ('Cheese');
+
 INSERT INTO FoodType(Name) VALUES
                                 ('Vegetarian'),
                                 ('Contains Meat');
+
 INSERT INTO Instruction(Details) VALUES
-                                ('Cook'),
-                                ('Boil');
+                                      ('Cook'),
+                                      ('Boil');
+
 INSERT INTO InstructionList VALUES
                                 (1, 1),
                                 (2, 2);
+
 INSERT INTO Recipe(Name, Serving, IngredientID, FoodTypeID, InstructionListID) VALUES
-                                ('Pizza', 2, 2, 1, 1),
-                                ('Ramen', 4, 1, 2, 2);
+                                                                                    ('Pizza', 2, 2, 1, 1),
+                                                                                    ('Ramen', 4, 1, 2, 2);
