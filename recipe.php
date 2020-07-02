@@ -1,9 +1,13 @@
 <?php
   require 'Includes/connect.php';
+  include 'Includes/sessionStart.php';
 ?>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <script>
+    var username = '<?php echo $username; ?>';
+  </script>
   <title>Recipe List</title>
   <link rel="stylesheet" href="CSS/index.css?version=12" type="text/css">
   <link rel="stylesheet" href="CSS/recipe.css?version=3" type="text/css">
@@ -31,6 +35,7 @@
         </select>
       </section>
       <section id="single">
+        <input id="fav" type="button" value="Favourite">
       </section>
     </section>
     <section class="page-footer">

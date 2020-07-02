@@ -1,6 +1,7 @@
 <?php
   require 'Includes/connect.php';
   require 'Includes/Classes.php';
+  include 'Includes/sessionStart.php';
 
   if(isset($_POST['submitButton'])){
     $user = new User($pdo);
@@ -10,6 +11,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <script>
+    var username = '<?php echo $username; ?>';
+  </script>
   <title>Login</title>
   <link rel="stylesheet" href="CSS/index.css?version=9" type="text/css">
   <link rel="stylesheet" href="CSS/login.css?version=3" type="text/css">

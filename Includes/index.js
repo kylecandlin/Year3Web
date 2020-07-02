@@ -1,4 +1,5 @@
 $(document).ready(function(){
+  /*** Navigation Bar Animations and Functions ***/
   function closeNav(){
     $("#nav-menu").slideUp("slow");
     $("#cross").hide();
@@ -32,6 +33,18 @@ $(document).ready(function(){
     closeNav();
   });
 
+  /*** Login and Account Changing ***/
+  console.log(username);
+  if(username != '') {
+    $("#login").text("Account");
+    $("#login").attr("href", "account.php");
+  }
+  if(username == '') {
+    $("#login").text("Login");
+    $("#login").attr("href", "login.php");
+  }
+
+  /*** Verification using AJAX ***/
   $("#username").keyup(function(){
     var username = $(this).val();
     $.ajax({

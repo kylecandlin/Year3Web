@@ -1,6 +1,10 @@
+<?php include 'Includes/sessionStart.php'; ?>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <script>
+    var username = '<?php echo $username; ?>';
+  </script>
   <title>Home</title>
   <link rel="stylesheet" href="CSS/index.css?version=20" type="text/css">
   <link rel="stylesheet" href="CSS/home.css?version=4" type="text/css">

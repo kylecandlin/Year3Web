@@ -16,6 +16,15 @@
     $var->showSingle($_POST['callShowSingle']);
   }
 
+  // AJAX call for recipe.addFav
+  if(isset($_POST['callAddFav'])){
+    $var = new Recipe($pdo);
+    $output = $var->addFav($_POST['callAddFav']);
+
+    // output
+    echo $output;
+  }
+
   /**
   * Class that defines user functions
   */
@@ -55,12 +64,12 @@
 
         $stmt->execute();
 
-        session_start();
-        $_SESSION['username'] = $user['username'];
+        $_SESSION['username'] = $username;
         header('Location: index.php');
       }
     }
 
+    // Signs user in
     public function SignIn($username, $password){
       $sql = "SELECT * FROM Person WHERE Username = :username";
       $stmt = $this->pdo->prepare($sql);
@@ -71,6 +80,7 @@
 
       $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
+      // If user exists and password is correct, sign in and redirect to index.php
       if($user && password_verify($password.$this->salt, $user['Password'])){
         session_start();
         $_SESSION['username'] = $user['Username'];
@@ -79,6 +89,30 @@
       else {
         echo "<script> alert('Incorrect username or password.') </script>";
       }
+    }
+
+    // Gets all account information and displays in table
+    function getInfo($username){
+      $sql = "SELECT * FROM Person WHERE Username = :username";
+      $stmt = $this->pdo->prepare($sql);
+
+      $stmt->bindvalue(':username', $username);
+
+      $stmt->execute();
+
+      $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+      // Echo table displaying information
+      echo "<table>";
+      echo "<tr><th> ID </th><td>".$row['PersonID']."</td></tr>";
+      echo "<tr><th> Username </th><td>".$row['Username']."</td></tr>";
+      echo "</table>";
+    }
+
+    // logout and redirect to home page
+    function logout($username){
+      unset($_SESSION['username']);
+      header('location: index.php');
     }
   }
 
@@ -95,10 +129,10 @@
     }
 
     function showAll($orderBy){
-      $sql = "SELECT recipe.RecipeID, recipe.Name as rName, recipe.Serving, recipe.FoodTypeID, foodtype.Name as ftName
-              FROM recipe
+      $sql = "SELECT Recipe.RecipeID, Recipe.Name as rName, Recipe.Serving, Recipe.FoodTypeID, FoodType.Name as ftName
+              FROM Recipe
               INNER JOIN FoodType USING(FoodTypeID)
-              ORDER BY recipe.$orderBy ASC";
+              ORDER BY Recipe.$orderBy ASC";
       $stmt = $this->pdo->prepare($sql);
 
       $stmt->execute();
@@ -116,29 +150,106 @@
     function showSingle($ID){
 
       // prepare SQL to join tables and retrieve recipe
-      $sql = "SELECT recipe.Name as rName, recipe.Serving, ingredient.Name as iName, foodtype.Name as ftName, instruction.Details as iDetails
+      $sql = "SELECT recipe.Name as rName, recipe.Serving, ingredient.Name as iName, foodtype.Name as ftName, instructionlist.*, instruction.Details as iDetails
               FROM recipe
               INNER JOIN ingredient USING(IngredientID)
               INNER JOIN foodtype USING(FoodTypeID)
-              INNER JOIN instructionList USING(InstructionListID)
+              INNER JOIN instructionList USING(RecipeID)
               INNER JOIN instruction USING(InstructionID)
               WHERE RecipeID = $ID";
       $stmt = $this->pdo->prepare($sql);
 
       $stmt->execute();
 
-      $recipe = $stmt->fetch(PDO::FETCH_ASSOC);
+      $row = $stmt->fetch(PDO::FETCH_ASSOC);
+      // Output recipe details
+      echo "<h1>".$row['rName']."</h1>";
+      echo "<h1>".$row['Serving']."</h1>";
+      echo "<h1>".$row['ftName']."</h1>";
 
-      // Output details from
-      echo "<h1>".$recipe['rName']."</h1>";
-      echo "<h1>".$recipe['Serving']."</h1>";
-      echo "<h1>".$recipe['ftName']."</h1>";
+      while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+        // Amend DB to include link table and do below
+        echo "<h1>".$row['iName']."</h1>";
 
-      // Amend DB to include link table and do below \/
-      echo "<h1>".$recipe['iName']."</h1>";
+        // Put in while loop and table to show multiple table rows
+        echo "<h1>".$row['iDetails']."</h1>";
+      }
+    }
 
-      // Put in while loop and table to show multiple table rows
-      echo "<h1>".$recipe['iDetails']."</h1>";
+    function addFav($RecipeID){
+      $ID = $this->getIdFromUser($_SESSION['username']);
+
+      try {
+        $sql = "INSERT INTO AccFav(PersonID, RecipeID) VALUES('$ID', '$RecipeID')";
+        $stmt = $this->pdo->prepare($sql);
+
+        $stmt->execute();
+
+        return "Added to Favourites";
+      }
+      catch (PDOException $e) {
+        return $e;
+      }
+    }
+
+    function delFav($RecipeID){
+      $ID = $this->getIdFromUser($_SESSION['username']);
+
+      try {
+        $sql = "INSERT INTO AccFav(PersonID, RecipeID) VALUES('$ID', '$RecipeID')";
+        $stmt = $this->pdo->prepare($sql);
+
+        $stmt->execute();
+
+        return "Added to Favourites";
+      }
+      catch (PDOException $e) {
+        return $e;
+      }
+    }
+
+    function getFav($username){
+      $ID = $this->getIdFromUser($username);
+
+      $sql = "SELECT Recipe.RecipeID, Recipe.Name, Recipe.Serving
+              FROM Recipe
+              INNER JOIN AccFav ON Recipe.RecipeID = AccFav.RecipeID
+              INNER JOIN Person ON AccFav.PersonID = Person.PersonID
+              WHERE Person.Username = :username";
+      $stmt = $this->pdo->prepare($sql);
+
+      $stmt->bindValue(':username', $username);
+
+      $stmt->execute();
+
+      echo "<table>
+            <tr><th>Name</th><th>Serving</th></tr>";
+
+      while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+        echo "<tr>";
+        echo "<td>".$row['Name']."</td>";
+        echo "<td>".$row['Serving']."</td>";
+        echo "<td> Full recipe </td>";
+        echo "</tr>";
+      }
+
+      echo "</table>";
+    }
+
+    function getIdFromUser($username){
+      $sql = "SELECT PersonID
+              FROM Person
+              WHERE Username = :username";
+      $stmt = $this->pdo->prepare($sql);
+
+      $stmt->bindValue(':username', $username);
+
+      $stmt->execute();
+
+      $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+      $ID = $user['PersonID'];
+      return $ID;
     }
   }
 ?>

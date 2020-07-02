@@ -43,6 +43,24 @@ $(document).ready(function(){
               $("#single").append(response);
             }
           });
+
+          $("#fav").on("click", function(){
+            // Add recipe to favourites
+            $.ajax({
+              url: "Includes/Classes.php",
+              type: "POST",
+              data: {"callAddFav": ID},
+              success: function(response){
+                if (response == "Added to Favourites") {
+                  alert(response);
+                }
+                else {
+                  alert("There was an error, please try again later.")
+                  console.log(response);
+                }
+              }
+            });
+          });
         });
       }
     });
