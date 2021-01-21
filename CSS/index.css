@@ -277,8 +277,9 @@ h1 {
     grid-template-columns: auto;
     grid-template-rows: auto;
     grid-template-areas:
-      "footer-left footer-right"
-      "footer-bottom footer-bottom";
+      "footer-left"
+      "footer-right"
+      "footer-bottom";
   }
 
   #footer-company-details, #footer-contact-details, #footer-company-about {
@@ -290,6 +291,7 @@ h1 {
   #footer-company-details {
     align-self: stretch;
     justify-self: stretch;
+    text-align: center;
     grid-area: footer-left;
   }
 

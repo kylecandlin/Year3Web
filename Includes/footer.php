@@ -1,32 +1,26 @@
 <?php
   echo '
     <section id="footer-company-details">
-      <h1> The Bridge Inn </h1>
-      <p> est 1890 </p>
-      <section id="footer-media-links">
-        <p class="footer-media-icon"> img </p>
-        <p class="footer-media-icon"> img </p>
-        <p class="footer-media-icon"> img </p>
-        <p class="footer-media-icon"> img </p>
-      </section>
+      <h1> Recipe R Us </h1>
+      <p> est 2020 </p>
     </section>
     <section id="footer-contact-details">
       <section id="footer-company-location">
         <p class="footer-contact-icon"> img </p>
         <section class="footer-icon-text">
-          <span> 8 Bridge Street </span>
-          Stourport On Severn
+          <span> Contact Us </span>
+          fake.email@recipesrus.com
         </section>
       </section>
       <section id="footer-company-phone">
         <p class="footer-contact-icon"> img </p>
         <section class="footer-icon-text">
-          <p> 01299 123456 </p>
+          <p> 01234 123456 </p>
         </section>
       </section>
     </section>
     <section id="footer-company-about">
-      <h1> About The Pub </h1>
+      <h1> About Us </h1>
       <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit,
         sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
         Quis commodo odio aenean sed adipiscing diam donec. In cursus 0turpis

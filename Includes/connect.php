@@ -1,9 +1,9 @@
 <?php
   // Connection variables
-  $host = 'localhost';
-  $user = 'root';
-  $pass = '';
-  $dbms = 'recipedb';
+  $host = '172.16.11.22:3306';
+  $user = 'cank1_web';
+  $pass = '^tz6k1S5';
+  $dbms = 'cank1_17_web';
 
   // Create connection
   try {

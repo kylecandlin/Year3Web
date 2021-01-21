@@ -56,6 +56,17 @@
   margin: auto 0 auto 10px;
 }
 
+.submit-button {
+  background: linear-gradient(rgba(51, 133, 255, 0.7), rgba(51, 133, 255, 0.9));
+  color: white;
+  border: none;
+  margin-top: 2%;
+}
+
+.submit-button:hover {
+  background: linear-gradient(rgba(51, 133, 255, 0.65), rgba(51, 133, 255, 0.85));
+}
+
 @media only screen and (max-width: 1200px) and (min-width: 851px) {
   .info-container-image {
     width: 300px;
@@ -64,8 +75,13 @@
 }
 
 @media only screen and (max-width: 850px) {
+  #pub-title-nav {
+    position: relative;
+  }
+
   .info-container-image {
     width: 90%;
+    height: auto;
     margin: 5%;
   }
 

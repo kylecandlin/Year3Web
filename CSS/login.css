@@ -15,7 +15,7 @@
 
 #loginForm {
   width: 92%;
-  min-width: 350px;
+  min-width: 250px;
   max-width: 950px;
   margin: 6% auto;
   padding: 2%;
@@ -36,7 +36,7 @@ form h1 {
   border: 1px black solid;
   width: 60%;
   max-width: 600px;
-  min-width: 320px;
+  min-width: 220px;
   display: block;
   text-align: center;
   margin: 1% auto;

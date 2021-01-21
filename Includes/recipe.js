@@ -14,7 +14,7 @@ $(document).ready(function(){
 
   // Function that displays recipe list using AJAX call
   function showAll(orderBy){
-    $(".clickable").remove();
+    $(".info-container").remove();
 
     // AJAX call to show all recipes ordered by the sropdown list
     $.ajax({
@@ -55,7 +55,7 @@ $(document).ready(function(){
                   alert(response);
                 }
                 else {
-                  alert("There was an error, please try again later.")
+                  alert("There was an error favouriting this recipe, please try again later.")
                   console.log(response);
                 }
               }

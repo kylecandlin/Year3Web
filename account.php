@@ -11,6 +11,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <script>
     var username = '<?php echo $username; ?>';
   </script>
@@ -23,6 +24,7 @@
   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
   crossorigin="anonymous"></script>
   <script src="Includes/index.js"></script>
+  <script src="Includes/account.js"></script>
 </head>
 <body>
   <section class="container">
@@ -39,15 +41,14 @@
           $acc->getInfo($_SESSION['username']);
         ?>
         <form action="" method="post">
-          <input name="logout" type="submit" value="Logout" />
+          <input name="logout" type="submit" value="Logout" id="submit-button"/>
         </form>
       </section>
       <section id="recipe" class="acc-page">
         <h1>Favourite Recipes</h1>
-        <?php
-          $rec = new Recipe($pdo);
-          $rec->getFav($_SESSION['username']);
-        ?>
+        <section id="html-recipe-tbl">
+
+        </section>
       </section>
     </section>
     <section class="page-footer">

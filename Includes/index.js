@@ -36,8 +36,8 @@ $(document).ready(function(){
   /*** Login and Account Changing ***/
   console.log(username);
   if(username != '') {
-    $("#login").text("Account");
-    $("#login").attr("href", "account.php");
+    $(".login").text("Account");
+    $(".login").attr("href", "account.php");
   }
   if(username == '') {
     $("#login").text("Login");

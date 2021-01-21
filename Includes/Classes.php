@@ -25,6 +25,25 @@
     echo $output;
   }
 
+  // AJAX call for recipe.delFav
+  if(isset($_POST['callDelFav'])){
+    $var = new Recipe($pdo);
+    $output = $var->delFav($_POST['callDelFav']);
+
+    // output
+    echo $output;
+  }
+
+  // AJAX call for recipe.getFav
+  if(isset($_POST['callGetFav'])){
+    session_start();
+    $var = new Recipe($pdo);
+    $output = $var->getFav($_SESSION['username']);
+
+    // output
+    echo $output;
+  }
+
   /**
   * Class that defines user functions
   */
@@ -139,7 +158,7 @@
 
       while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
         echo "<section id=".$row['RecipeID']." class='info-container'>";
-        echo "<img src='CSS/Images/ramen.jpg' class='info-container-image' />";
+        echo "<img src='CSS/Images/ramen.jpg' alt='Image of ".$row['rName']."' class='info-container-image' />";
         echo "<h1 class='info-container-header'>".$row['rName']."</h1>";
         echo "<p class='info-container-text'>This recipe serves ".$row['Serving']." people. </p>";
         echo "<p class='info-container-text'>".$row['ftName']."</p></section>";
@@ -150,12 +169,12 @@
     function showSingle($ID){
 
       // prepare SQL to join tables and retrieve recipe
-      $sql = "SELECT recipe.Name as rName, recipe.Serving, ingredient.Name as iName, foodtype.Name as ftName, instructionlist.*, instruction.Details as iDetails
-              FROM recipe
-              INNER JOIN ingredient USING(IngredientID)
-              INNER JOIN foodtype USING(FoodTypeID)
-              INNER JOIN instructionList USING(RecipeID)
-              INNER JOIN instruction USING(InstructionID)
+      $sql = "SELECT Recipe.Name as rName, Recipe.Serving, Ingredient.Name as iName, FoodType.Name as ftName, InstructionList.*, Instruction.Details as iDetails
+              FROM Recipe
+              INNER JOIN Ingredient USING(IngredientID)
+              INNER JOIN FoodType USING(FoodTypeID)
+              INNER JOIN InstructionList USING(RecipeID)
+              INNER JOIN Instruction USING(InstructionID)
               WHERE RecipeID = $ID";
       $stmt = $this->pdo->prepare($sql);
 
@@ -177,6 +196,7 @@
     }
 
     function addFav($RecipeID){
+      session_start();
       $ID = $this->getIdFromUser($_SESSION['username']);
 
       try {
@@ -193,47 +213,58 @@
     }
 
     function delFav($RecipeID){
+      session_start();
       $ID = $this->getIdFromUser($_SESSION['username']);
 
       try {
-        $sql = "INSERT INTO AccFav(PersonID, RecipeID) VALUES('$ID', '$RecipeID')";
+        $sql = "DELETE FROM AccFav WHERE RecipeID = :recipe AND PersonID = :person";
         $stmt = $this->pdo->prepare($sql);
+
+        $stmt->bindValue(":recipe", $RecipeID);
+        $stmt->bindValue(":person", $ID);
 
         $stmt->execute();
 
-        return "Added to Favourites";
+        return "Removed from Favourites";
       }
       catch (PDOException $e) {
         return $e;
       }
     }
 
+    // Output favourites recipes
     function getFav($username){
+      // Get user ID
       $ID = $this->getIdFromUser($username);
 
-      $sql = "SELECT Recipe.RecipeID, Recipe.Name, Recipe.Serving
-              FROM Recipe
-              INNER JOIN AccFav ON Recipe.RecipeID = AccFav.RecipeID
-              INNER JOIN Person ON AccFav.PersonID = Person.PersonID
-              WHERE Person.Username = :username";
-      $stmt = $this->pdo->prepare($sql);
+      try {
+        $sql = "SELECT Recipe.RecipeID, Recipe.Name, Recipe.Serving
+                FROM Recipe
+                INNER JOIN AccFav ON Recipe.RecipeID = AccFav.RecipeID
+                INNER JOIN Person ON AccFav.PersonID = Person.PersonID
+                WHERE Person.Username = :username";
+        $stmt = $this->pdo->prepare($sql);
 
-      $stmt->bindValue(':username', $username);
+        $stmt->bindValue(':username', $username);
 
-      $stmt->execute();
+        $stmt->execute();
 
-      echo "<table>
-            <tr><th>Name</th><th>Serving</th></tr>";
+        echo "<table id='recipe-tbl'>
+              <tr><th>Name</th><th>Serving</th></tr>";
 
-      while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-        echo "<tr>";
-        echo "<td>".$row['Name']."</td>";
-        echo "<td>".$row['Serving']."</td>";
-        echo "<td> Full recipe </td>";
-        echo "</tr>";
+        while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+          echo "<tr>";
+          echo "<td>".$row['Name']."</td>";
+          echo "<td>".$row['Serving']."</td>";
+          echo "<td><img id=".$row['RecipeID']." class='del-img' draggable='false' src='CSS/Images/delete.png'></td>";
+          echo "</tr>";
+        }
+
+        echo "</table>";
       }
-
-      echo "</table>";
+      catch (\Exception $e) {
+        return $e;
+      }
     }
 
     function getIdFromUser($username){

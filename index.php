@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <script>
     var username = '<?php echo $username; ?>';
   </script>
@@ -24,17 +25,17 @@
     </section>
     <section class="content">
       <section class="info-container">
-        <img src="CSS/Images/pizza.jpg" class="info-container-image" />
+        <img src="CSS/Images/pizza.jpg" alt="Image of Pizza" class="info-container-image" />
         <h1 class="info-container-header"> This is a Test </h1>
         <p class="info-container-text"> This is to help me style this box. </p>
       </section>
       <section class="info-container">
-        <img src="CSS/Images/pizza.jpg" class="info-container-image" />
+        <img src="CSS/Images/pizza.jpg" alt="Image of Pizza" class="info-container-image" />
         <h1 class="info-container-header"> This is a Test </h1>
         <p class="info-container-text"> This is to help me style this box. </p>
       </section>
       <section class="info-container">
-        <img src="CSS/Images/pizza.jpg" class="info-container-image" />
+        <img src="CSS/Images/pizza.jpg" alt="Image of Pizza" class="info-container-image" />
         <h1 class="info-container-header"> This is a Test </h1>
         <p class="info-container-text"> This is to help me style this box. </p>
       </section>
